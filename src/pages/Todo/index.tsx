@@ -1,22 +1,44 @@
-import { toJS } from 'mobx';
 import { observer } from 'mobx-react';
 import { FC, useState } from 'react';
 
-import { AddInput } from '../../components/AddInput';
+import { Input } from '../../components/Input';
+import { MultipleAction } from '../../components/MultipleAction';
 import { TodoCard } from '../../components/TodoCard';
+import { TodoCounter } from '../../components/TodoCounter';
 import { TodoStore } from './store';
 
 export const Todo: FC = observer(() => {
   const [todoStore] = useState(() => new TodoStore());
-  const { todoList, addTodo, deleteTodo, editTodoStatus } = todoStore;
 
-  console.log(toJS(todoList));
+  const {
+    todoListWithFilter,
+    addTodo,
+    deleteTodo,
+    editTodoStatus,
+    setFilterText,
+    countTodo,
+    updatedTodoChecked,
+    multipleAction,
+  } = todoStore;
 
   return (
     <div>
-      <AddInput onClick={addTodo} />
-      {todoList.map((todo) => (
-        <TodoCard todo={todo} onDelete={deleteTodo} onChangeStatus={editTodoStatus} />
+      <TodoCounter counters={countTodo} />
+      <Input
+        placeholder="Enter a ToDo title..."
+        buttonLabel="Add new ToDo"
+        onClick={addTodo}
+        isAutoCleanText={true}
+      />
+      <Input placeholder="Enter a Todo name to filter..." buttonLabel="Apply" onClick={setFilterText} />
+      <MultipleAction onClickAction={multipleAction} />
+      {todoListWithFilter.map((todo) => (
+        <TodoCard
+          todo={todo}
+          onDelete={deleteTodo}
+          onChangeStatus={editTodoStatus}
+          onChecked={updatedTodoChecked}
+        />
       ))}
     </div>
   );

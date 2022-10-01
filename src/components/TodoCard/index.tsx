@@ -5,11 +5,11 @@ import { ETodoStatus } from '../../pages/Todo/constants';
 import { ITodoCard } from './interfaces';
 import { ButtonContainerStyled, TitleStyled, TodoCardStyled } from './styles';
 
-export const TodoCard: FC<ITodoCard> = observer(({ todo, onDelete, onChangeStatus }) => {
-  const { id, title, status } = todo;
+export const TodoCard: FC<ITodoCard> = observer(({ todo, onDelete, onChangeStatus, onChecked }) => {
+  const { id, title, status, checked } = todo;
 
   const handleCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.checked);
+    onChecked({ id, checked: event.target.checked });
   };
 
   const handleDelete = () => {
@@ -22,7 +22,7 @@ export const TodoCard: FC<ITodoCard> = observer(({ todo, onDelete, onChangeStatu
 
   return (
     <TodoCardStyled key={id}>
-      <input type="checkbox" onChange={handleCheckbox} />
+      <input type="checkbox" checked={checked} onChange={handleCheckbox} />
       <TitleStyled status={status}>
         <span>{title}</span>
       </TitleStyled>

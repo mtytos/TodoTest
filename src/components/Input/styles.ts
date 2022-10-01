@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AddInputStyled = styled.div`
+export const InputStyled = styled.div`
   input {
     width: 540px;
     height: 20px;
@@ -10,5 +10,8 @@ export const AddInputStyled = styled.div`
 
   button {
     height: 31px;
+    width: 112px;
   }
+
+  margin-bottom: 16px;
 `;

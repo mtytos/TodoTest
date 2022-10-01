@@ -6,3 +6,9 @@ export interface ITodo {
   status: ETodoStatus;
   checked: boolean;
 }
+
+export interface ICountTodo {
+  done: number;
+  undone: number;
+  total: number;
+}

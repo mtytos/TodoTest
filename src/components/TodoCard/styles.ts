@@ -9,7 +9,7 @@ export const TodoCardStyled = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  width: 640px;
+  width: 654px;
   margin: 16px auto;
   padding: 8px;
 
